@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.http.HttpResponse;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -40,6 +41,19 @@ public class BeerController {
 
         httpHeaders.add("Location ","http://localhsot:8081/api/v1/beer/"+saved.getId().toString());//sendet diesse headerinfo mit im request
         return new ResponseEntity(httpHeaders,HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{beerId}")
+    public ResponseEntity<BeerDto> update(@RequestBody BeerDto beerDto,@PathVariable UUID beerId){
+
+        beerService.updateBeer(beerId ,beerDto);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping("/{beerId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBeer (@PathVariable("beerId") UUID id){
+        beerService.deleteById(id);
     }
 
 }
