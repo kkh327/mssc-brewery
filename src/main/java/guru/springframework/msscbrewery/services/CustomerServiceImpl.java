@@ -35,6 +35,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void deleteById(UUID customerId) {
+        //TODO impl
         log.debug("Deleting.... ");
     }
 }
